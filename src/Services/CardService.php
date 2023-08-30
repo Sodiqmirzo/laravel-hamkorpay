@@ -3,11 +3,13 @@
 namespace LaravelHamkorPay\HamkorPay\Services;
 
 use LaravelHamkorPay\HamkorPay\Requests\Card\CreateCardRequest;
+use LaravelHamkorPay\HamkorPay\Responses\Card\CardCreateResponse;
 use LaravelHamkorPay\HamkorPay\Responses\Card\CardResponse;
+use LaravelHamkorPay\HamkorPay\Responses\Card\CardVerifyResponse;
 
 class CardService extends BaseService
 {
-    public function create(CreateCardRequest|string $number, string $expire): CardResponse
+    public function create(CreateCardRequest|string $number, string $expire): CardCreateResponse
     {
         if (!$number instanceof CreateCardRequest) {
             $number = new CreateCardRequest($number, $expire);
@@ -15,14 +17,14 @@ class CardService extends BaseService
 
         $response = $this->sendRequest('card.create', $number->toArray());
 
-        return CardResponse::from($response);
+        return CardCreateResponse::from($response);
     }
 
-    public function verify(string $key, string $confirm_code): CardResponse
+    public function verify(string $key, string $confirm_code): CardVerifyResponse
     {
         $response = $this->sendRequest('card.verify', compact('key', 'confirm_code'));
 
-        return CardResponse::from($response);
+        return CardVerifyResponse::from($response);
     }
 
     public function info(string $token): CardResponse
