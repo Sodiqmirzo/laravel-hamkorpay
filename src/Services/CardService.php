@@ -29,7 +29,7 @@ class CardService extends BaseService
 
     public function info(string $token): CardResponse
     {
-        $response = $this->sendRequest('card.info', ['card_id' => $token]);
+        $response = $this->sendRequest('card.info', [['card_id' => $token]]);
 
         return CardResponse::from($response);
     }
