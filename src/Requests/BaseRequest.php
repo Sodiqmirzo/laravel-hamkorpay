@@ -1,6 +1,6 @@
 <?php
 
-namespace Ittech\Payme\Requests;
+namespace LaravelHamkorPay\HamkorPay\Requests;
 
 use Spatie\LaravelData\Data;
 
