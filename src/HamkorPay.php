@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Http;
 use LaravelHamkorPay\HamkorPay\Exception\HamkorPayException;
 use LaravelHamkorPay\HamkorPay\Exception\HamkorPayTokenNotFound;
 use LaravelHamkorPay\HamkorPay\Services\CardService;
+use LaravelHamkorPay\HamkorPay\Services\PayService;
 use Throwable;
 
 class HamkorPay
@@ -59,5 +60,11 @@ class HamkorPay
     {
         $base_url = $this->config['base_url'];
         return new CardService($this->client->baseUrl($base_url));
+    }
+
+    public function pay(): PayService
+    {
+        $base_url = $this->config['base_url'];
+        return new PayService($this->client->baseUrl($base_url));
     }
 }

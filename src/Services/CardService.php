@@ -33,4 +33,11 @@ class CardService extends BaseService
 
         return CardResponse::from($response);
     }
+
+    public function list(string $phone): CardResponse
+    {
+        $response = $this->sendRequest('card.list', [compact('phone')]);
+
+        return CardResponse::from($response);
+    }
 }
