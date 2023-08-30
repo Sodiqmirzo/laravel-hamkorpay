@@ -1,47 +1,45 @@
 {
-    "name": ":vendor_slug/:package_slug",
-    "description": ":package_description",
+    "name": "ittech/hamkor-pay",
+    "description": "This is my package hamkor-pay",
     "keywords": [
-        ":vendor_name",
+        "Ittech",
         "laravel",
-        ":package_slug"
+        "hamkor-pay"
     ],
-    "homepage": "https://github.com/:vendor_slug/:package_slug",
+    "homepage": "https://github.com/ittech/hamkor-pay",
     "license": "MIT",
     "authors": [
         {
-            "name": ":author_name",
-            "email": "author@domain.com",
+            "name": "Sodiqmirzo Sattorov",
+            "email": "mr.sodiqmirzosattorov17@gmail.com",
             "role": "Developer"
         }
     ],
     "require": {
         "php": "^8.1",
         "spatie/laravel-package-tools": "^1.14.0",
-        "illuminate/contracts": "^10.0"
+        "illuminate/contracts": "^10.0",
+         "illuminate/http": "^v10.0",
+        "spatie/laravel-data": "^3.6",
+         "bilfeldt/laravel-http-client-logger": "^2.0"
     },
     "require-dev": {
         "laravel/pint": "^1.0",
         "nunomaduro/collision": "^7.8",
-        "nunomaduro/larastan": "^2.0.1",
         "orchestra/testbench": "^8.0",
         "pestphp/pest": "^2.0",
         "pestphp/pest-plugin-arch": "^2.0",
-        "pestphp/pest-plugin-laravel": "^2.0",
-        "phpstan/extension-installer": "^1.1",
-        "phpstan/phpstan-deprecation-rules": "^1.0",
-        "phpstan/phpstan-phpunit": "^1.0",
-        "spatie/laravel-ray": "^1.26"
+        "pestphp/pest-plugin-laravel": "^2.0"
     },
     "autoload": {
         "psr-4": {
-            "VendorName\\Skeleton\\": "src/",
-            "VendorName\\Skeleton\\Database\\Factories\\": "database/factories/"
+            "LaravelHamkorPay\\HamkorPay\\": "src/",
+            "LaravelHamkorPay\\HamkorPay\\Database\\Factories\\": "database/factories/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "VendorName\\Skeleton\\Tests\\": "tests/"
+            "LaravelHamkorPay\\HamkorPay\\Tests\\": "tests/"
         }
     },
     "scripts": {
@@ -61,10 +59,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "VendorName\\Skeleton\\SkeletonServiceProvider"
+                "LaravelHamkorPay\\HamkorPay\\HamkorPayServiceProvider"
             ],
             "aliases": {
-                "Skeleton": "VendorName\\Skeleton\\Facades\\Skeleton"
+                "HamkorPay": "LaravelHamkorPay\\HamkorPay\\Facades\\HamkorPay"
             }
         }
     },
