@@ -22,7 +22,7 @@ class PayConfirmResponse extends BaseResponse
 
     public function isOk(): bool
     {
-        if ($this->hold) {
+        if (!$this->hold) {
             return (int)$this->state === 3;
         }
         return (int)$this->state === 2;
