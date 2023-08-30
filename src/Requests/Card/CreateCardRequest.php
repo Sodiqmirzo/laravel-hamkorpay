@@ -2,7 +2,7 @@
 
 namespace LaravelHamkorPay\HamkorPay\Requests\Card;
 
-use Ittech\Payme\Requests\BaseRequest;
+use LaravelHamkorPay\HamkorPay\Requests\BaseRequest;
 
 class CreateCardRequest extends BaseRequest
 {

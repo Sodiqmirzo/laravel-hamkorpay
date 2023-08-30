@@ -43,7 +43,7 @@ abstract class BaseService
         if ($json === null) {
             $json = $response->json('error');
             $message = $json['message'] ?? 'Wrong response';
-            $lKey = 'payme.';
+            $lKey = 'hamkorpay.';
             $message = ltrim(__($lKey . $message), $lKey);
 
             $code = $json['code'] ?? -2048;
