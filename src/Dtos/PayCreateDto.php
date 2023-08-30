@@ -10,7 +10,7 @@ class PayCreateDto extends BaseDto
         public string  $currency_code,
         public CardDto $card,
         public ?array  $details = [],
-        public ?array  $payer_data = [],
+        public ?object  $payer_data = null,
     )
     {
     }
