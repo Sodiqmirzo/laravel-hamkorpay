@@ -15,7 +15,7 @@ class CardService extends BaseService
             $number = new CreateCardRequest($number, $expire);
         }
 
-        $response = $this->sendRequest('card.create', $number->toArray());
+        $response = $this->sendRequest('card.create', [$number->toArray()]);
 
         return CardCreateResponse::from($response);
     }
