@@ -36,7 +36,7 @@ abstract class BaseService
     protected function sendRequest(string $method, array $params)
     {
         $this->_id = Str::ulid()->toBase58();
-        $response = $this->client->post('', ['jsonrpc' => '2.0', 'method' => $method, 'id' => $this->_id, 'params' => $params])
+        $response = $this->client->post('acquiring/v1', ['jsonrpc' => '2.0', 'method' => $method, 'id' => $this->_id, 'params' => $params])
             ->throw(fn($r, $e) => self::catchHttpRequestError($e, $r));
         $json = $response->json('result');
 
