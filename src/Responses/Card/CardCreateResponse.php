@@ -8,7 +8,7 @@ use LaravelHamkorPay\HamkorPay\Responses\BaseResponse;
 class CardCreateResponse extends BaseResponse
 {
     public function __construct(
-        public string $numberw,
+        public string $number,
         public string $expiry,
         public string $key
     )
