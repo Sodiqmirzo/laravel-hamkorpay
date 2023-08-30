@@ -22,7 +22,7 @@ class CardService extends BaseService
 
     public function verify(string $key, string $confirm_code): CardVerifyResponse
     {
-        $response = $this->sendRequest('card.verify', compact('key', 'confirm_code'));
+        $response = $this->sendRequest('card.verify', [compact('key', 'confirm_code')]);
 
         return CardVerifyResponse::from($response);
     }
