@@ -16,6 +16,9 @@ class HamkorPay
     private PendingRequest $client;
     private mixed $config;
 
+    /**
+     * @throws HamkorPayException
+     */
     public function __construct()
     {
         try {
@@ -30,7 +33,8 @@ class HamkorPay
             if (cache()->has($this::HAMKORPAY_TOKEN)) {
                 $this->client->withToken(cache()->get($this::HAMKORPAY_TOKEN));
             } else {
-                $this->client->withToken($this->getAccessToken());
+                $this->getAccessToken();
+                $this->client->withToken(cache()->get($this::HAMKORPAY_TOKEN));
             }
         } catch (Throwable) {
             throw new HamkorPayException('HamkorPay config not found', -1024);
@@ -50,10 +54,10 @@ class HamkorPay
 
         throw_if($request['access_token'] === null, new HamkorPayTokenNotFound('HamkorPay token not found', -1025));
 
-        if (isset($request['access_token'])) {
-            cache()->put($this::HAMKORPAY_TOKEN, $request['access_token'], $request['expires_in'] - 10);
+        if (isset($request['access_token']) === null && $request['access_token'] === null && $request['expires_in'] === null && $request['token_type'] === null) {
+            throw new HamkorPayException('HamkorPay token not found', -1025);
         }
-        return $request['access_token'];
+        cache()->put($this::HAMKORPAY_TOKEN, $request['access_token'], $request['expires_in'] - 10);
     }
 
     public function card(): CardService
