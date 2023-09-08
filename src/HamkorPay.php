@@ -30,12 +30,10 @@ class HamkorPay
             $this->client = Http::log()->withHeaders(['x-requested-with' => $config['request_from'] ?? 'Merchant Gateway'])
                 ->asJson()->withOptions($options);
 
-            if (cache()->has($this::HAMKORPAY_TOKEN)) {
-                $this->client->withToken(cache()->get($this::HAMKORPAY_TOKEN));
-            } else {
+            if (!cache()->has($this::HAMKORPAY_TOKEN)) {
                 $this->getAccessToken();
-                $this->client->withToken(cache()->get($this::HAMKORPAY_TOKEN));
             }
+            $this->client->withToken(cache()->get($this::HAMKORPAY_TOKEN));
         } catch (Throwable) {
             throw new HamkorPayException('HamkorPay config not found', -1024);
         }
