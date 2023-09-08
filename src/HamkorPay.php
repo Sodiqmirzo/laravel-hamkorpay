@@ -12,7 +12,7 @@ use Throwable;
 
 class HamkorPay
 {
-    const HAMKORPAY_TOKEN = 'hamkorpay_token';
+    const HAMKOR_PAY_TOKEN = 'hamkor_pay_token';
     private PendingRequest $client;
     private mixed $config;
 
@@ -30,10 +30,8 @@ class HamkorPay
             $this->client = Http::log()->withHeaders(['x-requested-with' => $config['request_from'] ?? 'Merchant Gateway'])
                 ->asJson()->withOptions($options);
 
-            if (!cache()->has($this::HAMKORPAY_TOKEN)) {
-                $this->getAccessToken();
-            }
-            $this->client->withToken(cache()->get($this::HAMKORPAY_TOKEN));
+            $this->getAccessToken();
+
         } catch (Throwable) {
             throw new HamkorPayException('HamkorPay config not found', -1024);
         }
@@ -44,6 +42,10 @@ class HamkorPay
      */
     private function getAccessToken()
     {
+        if (cache()->has($this::HAMKOR_PAY_TOKEN)) {
+            return $this->client->withToken(cache()->get($this::HAMKOR_PAY_TOKEN));
+        }
+
         $tokenUrl = $this->config['token_url'];
         $username = $this->config['username'];
         $password = $this->config['password'];
@@ -55,7 +57,8 @@ class HamkorPay
         if (isset($request['access_token']) === null && $request['access_token'] === null && $request['expires_in'] === null && $request['token_type'] === null) {
             throw new HamkorPayException('HamkorPay token not found', -1025);
         }
-        cache()->put($this::HAMKORPAY_TOKEN, $request['access_token'], $request['expires_in'] - 10);
+        cache()->put($this::HAMKOR_PAY_TOKEN, $request['access_token'], $request['expires_in'] - 10);
+        return $this->client->withToken($request['access_token']);
     }
 
     public function card(): CardService
