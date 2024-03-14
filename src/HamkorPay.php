@@ -48,11 +48,8 @@ class HamkorPay
         $username = $this->config['username'];
         $password = $this->config['password'];
         $request = $this->client->baseUrl($tokenUrl)
-            ->withHeaders([
-                'Content-Type' => 'application/json',
-                'Authorization' => 'Basic ' . base64_encode($username . ':' . $password)
-            ])
-            ->post('/oauth2/token', ['grant_type' => 'client_credentials']);
+            ->withHeaders(['Authorization' => 'Basic ' . base64_encode($username . ':' . $password)])
+            ->post('/token', ['grant_type' => 'client_credentials']);
 
         throw_if($request['access_token'] === null, new HamkorPayTokenNotFound('HamkorPay token not found', -1025));
 
