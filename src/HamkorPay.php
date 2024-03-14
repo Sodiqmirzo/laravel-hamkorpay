@@ -47,7 +47,9 @@ class HamkorPay
         $tokenUrl = $this->config['token_url'];
         $username = $this->config['username'];
         $password = $this->config['password'];
-        $request = $this->client->baseUrl($tokenUrl)->withBasicAuth($username, $password)
+        $request = $this->client->baseUrl($tokenUrl)
+            ->withToken(base64_encode($username . ':' . $password))
+            ->withBasicAuth($username, $password)
             ->post('/oauth2/token', ['grant_type' => 'client_credentials']);
 
         throw_if($request['access_token'] === null, new HamkorPayTokenNotFound('HamkorPay token not found', -1025));
