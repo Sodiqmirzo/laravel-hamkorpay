@@ -9,10 +9,10 @@ use LaravelHamkorPay\HamkorPay\Responses\Card\CardVerifyResponse;
 
 class CardService extends BaseService
 {
-    public function create(CreateCardRequest|string $number, string $expire): CardCreateResponse
+    public function create(CreateCardRequest|string $number, string $expire, bool $must_otp = true, string $phone = ''): CardCreateResponse
     {
         if (!$number instanceof CreateCardRequest) {
-            $number = new CreateCardRequest($number, $expire);
+            $number = new CreateCardRequest($number, $expire, $must_otp, $phone);
         }
 
         $response = $this->sendRequest('card.create', [$number->toArray()]);

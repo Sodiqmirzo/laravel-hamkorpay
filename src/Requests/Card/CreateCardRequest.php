@@ -9,6 +9,8 @@ class CreateCardRequest extends BaseRequest
     public function __construct(
         public string $number,
         public string $expiry,
+        public bool $must_otp = true,
+        public string $phone = '',
     )
     {
     }
