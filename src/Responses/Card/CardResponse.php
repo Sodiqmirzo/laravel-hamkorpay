@@ -13,9 +13,9 @@ class CardResponse extends BaseResponse
         public string $expiry,
         public int    $balance,
         public string $owner,
-        public string $phone,
         public string $status,
         public bool   $is_sms_enabled,
+        public ?string $phone = '',
     )
     {
     }
